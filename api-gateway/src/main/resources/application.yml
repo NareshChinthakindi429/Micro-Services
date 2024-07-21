@@ -1,0 +1,26 @@
+eureka: 
+  client: 
+    registerWithEureka: true 
+    fetchRegistry: true 
+    service-url: 
+      defaultZone: http://localhost:8761/eureka/ 
+  instance: 
+    hostname: localhost 
+server: 
+  port: 9000 
+spring: 
+  application: 
+      name: api-gateway 
+  cloud: 
+    gateway: 
+      routes: 
+      - id: CITIZEN-SERVICE-CENTER 
+        uri: 
+          lb://CITIZEN-SERVICE-CENTER 
+        predicates: 
+        - Path=/citizen/** 
+      - id: VACCINATION-SERVICE-CENTER   
+        uri: 
+          lb://VACCINATION-SERVICE-CENTER 
+        predicates: 
+        - Path=/vaccinationCenter/**
